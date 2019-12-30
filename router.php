@@ -2,5 +2,5 @@
 
 $router = new \app\Router;
 
-$router->get('my', 'MainController@index');
-$router->get('my/home', 'MainController@home');
+$router->get('', 'MainController@index');
+$router->get('home', 'MainController@home');
