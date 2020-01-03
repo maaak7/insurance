@@ -13,6 +13,16 @@ class Router
         }
 
         $uri = trim($_SERVER['REQUEST_URI'], '/');
+        $param = null;
+
+        if (preg_match('/\{([^"]+)}/', $args[0], $p)) {
+            $args_cut_number = strlen($p[0]) + 1;
+            $uri_cut_number = strlen($p[1]);
+            $uri_arr = explode('/', $uri);
+            $param = $uri_arr[count($uri_arr)-1];
+            $args[0] = substr($args[0], 0, -abs($args_cut_number));
+            $uri = substr($uri, 0, -abs($uri_cut_number));
+        }
 
         if ($args[0] === $uri) {
             $callParams = explode('@', $args[1]);
@@ -20,7 +30,7 @@ class Router
             $methodName = $callParams[1];
 
             $my_obj = new $className();
-            $my_obj->$methodName();
+            $my_obj->$methodName($param);
         }
     }
 }
