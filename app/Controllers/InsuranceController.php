@@ -8,7 +8,7 @@ class InsuranceController
 {
     public function get()
     {
-        return InsuranceService::get();
+        return InsuranceService::get($_GET['limit'], $_GET['page']);
     }
 
     public function getCount()

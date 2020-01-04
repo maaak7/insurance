@@ -20,9 +20,10 @@ class InsuranceService
         return true;
     }
 
-    public static function get()
+    public static function get($limit, $page)
     {
-        $query = 'SELECT * FROM insurances';
+        $offset = ($page - 1) * $limit;
+        $query = 'SELECT * FROM insurances LIMIT '.$limit.' OFFSET '.$offset .' ORDER BY id';
         // TODO here needs to be MYSQL operation with this query
         return [];
     }
